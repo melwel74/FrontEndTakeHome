@@ -37,3 +37,30 @@ function isValidEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+
+fetch('https://frontend-take-home.fetchrewards.com/form')
+  .then((response) => response.json())
+  .then((data) => {
+    // Extract the occupation and state options from the data
+    const occupationOptions = data.occupationOptions;
+    const stateOptions = data.stateOptions;
+
+    // Get the select elements
+    const occupationSelect = document.querySelector('#occupation');
+    const stateSelect = document.querySelector('#state');
+
+    // Add the options to the select elements
+    occupationOptions.forEach((option) => {
+      const optionElement = document.createElement('option');
+      optionElement.value = option;
+      optionElement.textContent = option;
+      occupationSelect.appendChild(optionElement);
+    });
+    stateOptions.forEach((option) => {
+      const optionElement = document.createElement('option');
+      optionElement.value = option;
+      optionElement.textContent = option;
+      stateSelect.appendChild(optionElement);
+    });
+  });
